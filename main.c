@@ -67,10 +67,7 @@ long long unsigned int pow_iter_quick(long long unsigned int x, long long unsign
 }
 
 int main(int argc, char** argv) {
-    printf("2 to the 10th power: %llu\n", pow_iter(3, 39));
-    printf("2 to the 10th power: %llu\n", pow_rec(3, 39));
-    printf("2 to the 10th power: %llu\n", pow_rec_quick(3, 39));
-    printf("2 to the 10th power: %llu\n", pow_iter_quick(3, 39));
+    
 
     return 0;
 }
