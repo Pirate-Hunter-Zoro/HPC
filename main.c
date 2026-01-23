@@ -16,21 +16,56 @@ void swap_ints(int *a, int *b) {
     *b = tmp;
 }
 
-int main(int argc, char** argv) {
-    int *arr = (int *)calloc(5, sizeof(int));
-    if (arr == NULL) {
-        printf("Error allocating memory...");
+int pow_rec(int x, int p) {
+    if (p == 0) {
         return 1;
     } else {
-        for (int i=0; i<=4; i++) {
-            arr[i] = i*10;
-        }
-        for (int i=0; i<=4; i++) {
-            printf("Array value at index %d: %d\n", i, arr[i]);
-        }
-        free(arr);
-        arr = NULL;
+        return x * pow_rec(x, p-1);
     }
-    
+}
+
+int pow_iter(int x, int p) {
+    int result = 1;
+    for (int i=1; i<=p; i++) {
+        result *= x;
+    }
+    return result;
+}
+
+int pow_rec_quick(int x, int p) {
+    if (p == 0) {
+        return 1;
+    } else {
+        int new_p = p/2;
+        int square_root = pow_rec_quick(x, new_p);
+        int result = square_root * square_root;
+        if (p % 2) {
+            // Odd power
+            result *= x;
+        }
+        return result;
+    }
+}
+
+int pow_iter_quick(int x, int p) {
+    int result = 1;
+    int base = x;
+    while (p > 0) {
+        if (p % 2) {
+            // Odd current exponent
+            result *= base;
+        } 
+        base *= base;
+        p /= 2;
+    }
+    return result;
+}
+
+int main(int argc, char** argv) {
+    printf("2 to the 10th power: %d\n", pow_iter(2, 10));
+    printf("2 to the 10th power: %d\n", pow_rec(2, 10));
+    printf("2 to the 10th power: %d\n", pow_rec_quick(2, 10));
+    printf("2 to the 10th power: %d\n", pow_iter_quick(2, 10));
+
     return 0;
 }
