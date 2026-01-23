@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
 
 struct Point {
     int x;
@@ -16,7 +17,8 @@ void swap_ints(int *a, int *b) {
     *b = tmp;
 }
 
-int pow_rec(int x, int p) {
+long long unsigned int pow_rec(long long unsigned int x, long long unsigned int p)
+{
     if (p == 0) {
         return 1;
     } else {
@@ -24,21 +26,23 @@ int pow_rec(int x, int p) {
     }
 }
 
-int pow_iter(int x, int p) {
-    int result = 1;
+long long unsigned int pow_iter(long long unsigned int x, long long unsigned int p)
+{
+    long long unsigned int result = 1;
     for (int i=1; i<=p; i++) {
         result *= x;
     }
     return result;
 }
 
-int pow_rec_quick(int x, int p) {
+long long unsigned int pow_rec_quick(long long unsigned int x, long long unsigned int p)
+{
     if (p == 0) {
         return 1;
     } else {
-        int new_p = p/2;
-        int square_root = pow_rec_quick(x, new_p);
-        int result = square_root * square_root;
+        long long unsigned int new_p = p/2;
+        long long unsigned int half_power = pow_rec_quick(x, new_p);
+        long long unsigned int result = half_power * half_power;
         if (p % 2) {
             // Odd power
             result *= x;
@@ -47,9 +51,10 @@ int pow_rec_quick(int x, int p) {
     }
 }
 
-int pow_iter_quick(int x, int p) {
-    int result = 1;
-    int base = x;
+long long unsigned int pow_iter_quick(long long unsigned int x, long long unsigned int p)
+{
+    long long unsigned int result = 1;
+    long long unsigned int base = x;
     while (p > 0) {
         if (p % 2) {
             // Odd current exponent
@@ -62,10 +67,10 @@ int pow_iter_quick(int x, int p) {
 }
 
 int main(int argc, char** argv) {
-    printf("2 to the 10th power: %d\n", pow_iter(2, 10));
-    printf("2 to the 10th power: %d\n", pow_rec(2, 10));
-    printf("2 to the 10th power: %d\n", pow_rec_quick(2, 10));
-    printf("2 to the 10th power: %d\n", pow_iter_quick(2, 10));
+    printf("2 to the 10th power: %llu\n", pow_iter(3, 39));
+    printf("2 to the 10th power: %llu\n", pow_rec(3, 39));
+    printf("2 to the 10th power: %llu\n", pow_rec_quick(3, 39));
+    printf("2 to the 10th power: %llu\n", pow_iter_quick(3, 39));
 
     return 0;
 }
