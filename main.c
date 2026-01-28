@@ -66,8 +66,33 @@ long long unsigned int pow_iter_quick(long long unsigned int x, long long unsign
     return result;
 }
 
-int main(int argc, char** argv) {
-    
+void p(char x); // Declares existence of p
+void q(char a); // Declares existence of q
+void p(char x)
+{           // p, x, q
+    q(x);
+    char y;
+            // p, x, y, q
+    char z;
+}           // p, x, y, z, q
+
+char z; // p, z
+
+void q(char a)
+{
+    char b;
+            // p, z, q, a, b
+    {
+        char c;
+    }       // p, z, q, a, b, c
+
+    char d;
+}           // p, z, q, a, b, d
+
+// gcc -Wall -g main.c -o main 
+int main(int argc, char** argv) // How many arguments there are and the actual value - point to char pointer (array of arrays of characters)
+{
+    printf("Hello World\n");
 
     return 0;
 }
